@@ -11,10 +11,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import org.apache.log4j.Logger;
+
 public class IntroUI extends JFrame {
 
 	private static final long serialVersionUID = 1L; // class version
 
+	private static Logger log = Logger.getLogger(Intro.class);
+	
 	// constructs the user interface
 	public IntroUI(Properties params, String version) {
 		// sets window properties
@@ -44,6 +48,8 @@ public class IntroUI extends JFrame {
 		// displays the window
 		repaint();
 		setVisible(true);
+		
+		log.info("Intro window was opened.");
 	}
 
 }
