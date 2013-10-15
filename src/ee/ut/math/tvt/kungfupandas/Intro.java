@@ -17,9 +17,13 @@ public class Intro {
 	private static Properties getParams(String filename) {
 		Properties params = new Properties();
 		try {
-			//params.load(Intro.class.getClassLoader().getResourceAsStream(
-					//filename + ".properties"));
-			params.load(new FileInputStream(filename + ".properties"));
+			try {
+				params.load(Intro.class.getClassLoader().getResourceAsStream(
+						filename + ".properties"));
+			} catch (NullPointerException e) {
+				// if file is inaccessible, try a direct stream
+				params.load(new FileInputStream(filename + ".properties"));
+			}
 		} catch (IOException e) {
 			// fails quietly and returns empty properties stack
 		}

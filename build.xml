@@ -2,16 +2,16 @@
 <project basedir="." name="POS" default="build">
 
 	<!-- defines variables and files used during the rest of this script -->
-	
+
 	<property file="application.properties" prefix="app" />
-	
+
 	<property name="build.dir" value="${basedir}/build" />
 	<property name="build.classes.dir" value="${build.dir}/classes" />
 	<property name="src.dir" value="${basedir}/src" />
 	<property name="conf.dir" value="${basedir}/etc" />
 
 	<!-- defines classpath variants used for different tasks -->
-	
+
 	<path id="compile.classpath">
 		<fileset dir="lib">
 			<include name="*.jar" />
@@ -43,6 +43,11 @@
 	</target>
 
 	<target name="dist" depends="build" description="generate the distribution">
+		<!-- increases build.revision.number -->
+		<propertyfile file="version.properties" comment="version properties">
+			<entry key="build.revision.number" type="int" default="0" operation="+" />
+		</propertyfile>
+
 		<!-- creates the distribution directory -->
 		<mkdir dir="${build.dir}/jar" />
 
@@ -51,14 +56,13 @@
 			<fileset file="application.properties" />
 			<fileset file="version.properties" />
 			<fileset file="${app.team.logo}" />
+			<fileset file="${conf.dir}/log4j.xml" />
+			<fileset file="${conf.dir}/log4j.dtd" />
 			<manifest>
 				<attribute name="Main-Class" value="ee.ut.math.tvt.kungfupandas.Intro" />
 			</manifest>
+	        <zipgroupfileset dir="lib" includes="*.jar"/>
 		</jar>
-		<!-- increases build.revision.number -->
-		<propertyfile file="version.properties" comment="version properties">
-			<entry key="build.revision.number" type="int" default="0" operation="+" />
-		</propertyfile>
 	</target>
 
 	<!-- executes jar file created by dist target -->
