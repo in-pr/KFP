@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project basedir="." name="POS" default="build">
 
-	<!-- Definitions of variables used during the rest of this script -->
-
-	<property file="build.properties" />
+	<!-- defines variables and files used during the rest of this script -->
+	
+	<property file="application.properties" prefix="app" />
+	
 	<property name="build.dir" value="${basedir}/build" />
 	<property name="build.classes.dir" value="${build.dir}/classes" />
 	<property name="src.dir" value="${basedir}/src" />
-	<property name="dist.dir" value="${basedir}/dist" />
-	<property name="conf.dir" value="${basedir}/etc" />
-	<property name="doc.dir" value="${build.dir}/doc" />
-	<property name="test.reports.dir" value="${build.dir}/reports/" />
 
-	<!-- Definitions of classpath variants used for different tasks -->
-
+	<!-- defines classpath variants used for different tasks -->
+	
 	<path id="compile.classpath">
 		<fileset dir="lib">
 			<include name="*.jar" />
@@ -29,8 +26,7 @@
 		</fileset>
 	</path>
 
-	<!-- Definitions of runnable ant targets.
-         Run them from the command line by executing "ant [targetname]"  -->
+	<!-- defines runnable ant targets -->
 
 	<target name="run" depends="build" description="Run the POS application">
 		<java classname="ee.ut.math.tvt.kungfupandas.Intro" classpathref="test.classpath" fork="yes" />
@@ -46,29 +42,30 @@
 	</target>
 
 	<target name="dist" depends="build" description="generate the distribution">
-		<!-- Create the distribution directory -->
-		<mkdir dir="${dist.dir}/jar" />
+		<!-- creates the distribution directory -->
+		<mkdir dir="${build.dir}/jar" />
 
-		<!-- Put everything in ${build} into the kungfupandas.jar file -->
-		<jar jarfile="${build.dir}/jar/kungfupandas.jar" basedir="${build.dir}/classes">
-			<fileset file="version.properties" />
+		<!-- puts everything in ${build} into the kungfupandas.jar file -->
+		<jar jarfile="${build.dir}/jar/${app.team.name}.jar" basedir="${build.dir}/classes">
 			<fileset file="application.properties" />
+			<fileset file="version.properties" />
+			<fileset file="${app.team.logo}" />
 			<manifest>
 				<attribute name="Main-Class" value="ee.ut.math.tvt.kungfupandas.Intro" />
 			</manifest>
 		</jar>
-		<!--increase build.revision.number-->
+		<!-- increases build.revision.number -->
 		<propertyfile file="version.properties" comment="version properties">
 			<entry key="build.revision.number" type="int" default="0" operation="+" />
 		</propertyfile>
 	</target>
 
-	<!--executes jar file created by dist target -->
+	<!-- executes jar file created by dist target -->
 	<target name="jrun" description="executes jar file created by dist target">
-		<java jar="${build.dir}/jar/kungfupandas.jar" fork="yes"/>
+		<java jar="${build.dir}/jar/${app.team.name}.jar" fork="yes" />
 	</target>
 
-	<!-- Clean up build system results -->
+	<!-- cleans up build system results -->
 	<target name="clean" description="Clean up build system results">
 		<delete dir="${build.dir}" />
 	</target>
