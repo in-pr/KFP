@@ -8,6 +8,7 @@
 	<property name="build.dir" value="${basedir}/build" />
 	<property name="build.classes.dir" value="${build.dir}/classes" />
 	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/etc" />
 
 	<!-- defines classpath variants used for different tasks -->
 	

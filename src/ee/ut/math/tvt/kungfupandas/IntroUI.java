@@ -26,8 +26,8 @@ public class IntroUI extends JFrame {
 		
 		// makes components
 		JLabel[] bits = new JLabel[6];
-		bits[0] = new JLabel(new ImageIcon(getClass().getClassLoader()
-				.getResource(params.getProperty("team.logo"))));
+		//bits[0] = new JLabel(new ImageIcon(getClass().getClassLoader().getResource(params.getProperty("team.logo"))));
+		bits[0] = new JLabel(new ImageIcon(params.getProperty("team.logo")));
 		bits[1] = new JLabel("Team Name: " + params.getProperty("team.name"));
 		bits[2] = new JLabel("Team Leader: " + params.getProperty("team.leader"));
 		bits[3] = new JLabel("Team Leader Email: " + params.getProperty("team.leader.email"));
