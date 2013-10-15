@@ -12,6 +12,7 @@
 	<property name="doc.dir" value="${build.dir}/doc"/>
 	<property name="test.reports.dir" value="${build.dir}/reports/"/>
 
+	
 	<!-- Definitions of classpath variants used for different tasks -->
 
 	<path id="compile.classpath">
