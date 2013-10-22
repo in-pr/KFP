@@ -18,6 +18,7 @@ public class IntroUI extends JFrame {
 
 	// constructs the user interface
 	public IntroUI(Properties params, String version) {
+
 		// sets window properties
 		super(params.getProperty("team.name"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,16 +46,13 @@ public class IntroUI extends JFrame {
 
 		// adds components
 		for (JLabel x : bits) {
-			x.setHorizontalAlignment(JLabel.CENTER);
 			add(x);
 			add(Box.createVerticalGlue());
 		}
 
-		// displays the window
-		repaint();
-		setVisible(true);
-
+		// displays a message indicating that intro window is opened
 		log.info("Intro window was opened.");
+
 	}
 
 }

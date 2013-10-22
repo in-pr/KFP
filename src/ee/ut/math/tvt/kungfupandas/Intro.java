@@ -9,9 +9,11 @@ public class Intro {
 	public static void main(String[] args) {
 		Properties application = getParams("application");
 		Properties version = getParams("version");
-		new IntroUI(application, version.getProperty("build.major.number")
-				+ "." + version.getProperty("build.minor.number") + "."
-				+ version.getProperty("build.revision.number"));
+		IntroUI teaminfo = new IntroUI(application,
+				version.getProperty("build.major.number") + "."
+						+ version.getProperty("build.minor.number") + "."
+						+ version.getProperty("build.revision.number"));
+		teaminfo.setVisible(true);
 	}
 
 	private static Properties getParams(String filename) {
