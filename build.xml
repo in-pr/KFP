@@ -21,7 +21,7 @@
 
 	<path id="test.classpath">
 		<pathelement location="${classes.dir}" />
-		<path refid="build.path" />
+		<path refid="compile.classpath" />
 	</path>
 
 	<!-- defines runnable ant targets -->
@@ -33,12 +33,12 @@
 	<target name="build" description="Compiles the source code and sets log4j and other files in the right places.">
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${classes.dir}" />
-		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="build.path" includeantruntime="false" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="compile.classpath" includeantruntime="false" />
 		<copy file="${basedir}/log4j.properties" todir="${classes.dir}" overwrite="true" />
 	</target>
 
 	<target name="run" depends="build" description="Executes your application via class Intro.">
-		<java classname="${main.class}" classpathref="run.path" fork="yes" />
+		<java classname="${main.class}" classpathref="test.classpath" fork="yes" />
 	</target>
 
 	<target name="dist" depends="build" description="Creates in the folder build/jar a separate JAR file.">
