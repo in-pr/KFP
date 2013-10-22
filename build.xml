@@ -15,11 +15,11 @@
 
 	<!-- defines classpath variants used for different tasks -->
 
-	<path id="build.path">
+	<path id="compile.classpath">
 		<fileset dir="${lib.dir}" includes="**/*.jar" />
 	</path>
 
-	<path id="run.path">
+	<path id="test.classpath">
 		<pathelement location="${classes.dir}" />
 		<path refid="build.path" />
 	</path>
