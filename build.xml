@@ -95,7 +95,7 @@
 		<input message="Password: " addproperty="PASSWORD" />
 		<git command="push">
 			<args>
-				<arg value="https://USERNAME:PASSWORD@github.com/in-pr/KFP.git" />
+				<arg value="https://${USERNAME}:${PASSWORD}@github.com/in-pr/KFP.git" />
 			</args>
 		</git>
 	</target>
