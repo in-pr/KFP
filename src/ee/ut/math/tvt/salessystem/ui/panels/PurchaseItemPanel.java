@@ -3,6 +3,7 @@ package ee.ut.math.tvt.salessystem.ui.panels;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -11,10 +12,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.NoSuchElementException;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -163,6 +166,7 @@ public class PurchaseItemPanel extends JPanel {
     public void addItemEventHandler() {
         // add chosen item to the shopping cart.
         StockItem stockItem = getStockItemByBarcode();
+       
         if (stockItem != null) {
             int quantity;
             try {
@@ -170,8 +174,14 @@ public class PurchaseItemPanel extends JPanel {
             } catch (NumberFormatException ex) {
                 quantity = 1;
             }
+            if (stockItem.getQuantity() < quantity) {
+            JOptionPane.showMessageDialog(this, "Item out of stock!",
+            		"Warning message", JOptionPane.PLAIN_MESSAGE);
+            	return;
+            }
             model.getCurrentPurchaseTableModel()
                 .addItem(new SoldItem(stockItem, quantity));
+            stockItem.setQuantity(stockItem.getQuantity() - quantity);
         }
     }
 
