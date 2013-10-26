@@ -104,7 +104,6 @@
 		</git>
 	</target>
 
-	
 	<target name="git_tag" description="creates the corresponding tag and synchronizes it with the GitHub">
 		<input message="Tag name: " addproperty="tag_name" />
 		<input message="Tag comment: " addproperty="tag_comment" />
