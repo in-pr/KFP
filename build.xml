@@ -52,7 +52,10 @@
 	</target>
 
 	<target name="run" depends="build" description="Executes your application via class Intro.">
-		<java classname="${main.class}" classpathref="test.classpath" fork="yes" />
+		<java classname="${main.class}" classpathref="test.classpath" fork="yes" >
+	    <jvmarg value="-Xdebug" />
+	    <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
+		</java>
 	</target>
 
 	<target name="dist" depends="build" description="Creates in the folder build/jar a separate JAR file.">
