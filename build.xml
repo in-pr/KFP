@@ -58,5 +58,12 @@
 	<target name="jrun" description="Opens your intro window using the JAR file created by dist ANT target.">
 		<java jar="${jar.dir}/${app.team.name}.jar" fork="yes" />
 	</target>
+	
+	<target name="runc" depends="build" description="Run the application (console)">
+		<java classname="${main.class}" classpathref="test.classpath" fork="yes">
+			<arg value="console" />
+		</java>
+	</target>
+
 
 </project>
