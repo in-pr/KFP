@@ -24,6 +24,20 @@
 		<path refid="compile.classpath" />
 	</path>
 
+	
+	<macrodef name="git">
+		<attribute name="command" />
+		<attribute name="dir" default="" />
+		<element name="args" optional="true" />
+		<sequential>
+			<echo message="git @{command}" />
+			<exec executable="git" dir="@{dir}">
+				<arg value="@{command}" />
+				<args/>
+			</exec>
+		</sequential>
+	</macrodef>
+	
 	<!-- defines runnable ant targets -->
 
 	<target name="clean" description="Removes the files created during the previous build.">
@@ -63,6 +77,27 @@
 		<java classname="${main.class}" classpathref="test.classpath" fork="yes">
 			<arg value="console" />
 		</java>
+	</target>
+	
+	<target name="git_commit" description=" make a commit to the local repository and push changes to the GitHub server">
+		<input message="Commit message" addproperty="commit-message" />
+		<git command="add">
+			<args>
+				<arg value="-A" />
+			</args>
+		</git>
+		<git command="commit">
+			<args>
+				<arg value="-m ${commit-message}" />
+			</args>
+		</git>
+		<input message="User name: " addproperty="USERNAME" />
+		<input message="Password: " addproperty="PASSWORD" />
+		<git command="push">
+			<args>
+				<arg value="https://USERNAME:PASSWORD@github.com/in-pr/KFP.git" />
+			</args>
+		</git>
 	</target>
 
 
