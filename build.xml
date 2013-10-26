@@ -110,11 +110,14 @@
 		<input message="Tag comment: " addproperty="tag_comment" />
 		<git command="tag">
 			<args>
-				<arg value="-a ${tag_name}" />
-				<arg value="-m ${tag_comment}'" />
-				
+				<arg value="-a" />
+				<arg value="${tag_name}" />
+				<arg value="-m" />
+				<arg value="${tag_comment}" />
 			</args>
 		</git>
+	    <input message="User name: " addproperty="USERNAME" />
+		<input message="Password: " addproperty="PASSWORD" />
 		<git command="push">
 			<args>
 				<arg value="--tags" />
