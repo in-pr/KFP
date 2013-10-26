@@ -82,6 +82,7 @@
 		</java>
 	</target>
 	
+	
 	<target name="git_commit" description=" make a commit to the local repository and push changes to the GitHub server">
 		<input message="Commit message" addproperty="commit-message" />
 		<git command="add">
