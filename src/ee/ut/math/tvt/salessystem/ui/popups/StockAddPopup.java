@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.salessystem.ui.panels.PurchaseItemPanel;
 
 public class StockAddPopup extends JFrame {
 
@@ -80,7 +81,8 @@ public class StockAddPopup extends JFrame {
 			String name = elements.get(nameField).getText();
 			String description = elements.get(descriptionField).getText();
 			double price = Double.valueOf(elements.get(priceField).getText());
-			int quantity = Integer.valueOf(elements.get(quantityField).getText());
+			int quantity = Integer.valueOf(elements.get(quantityField)
+					.getText());
 			// Check values
 			if (id < 0) {
 				throw new IllegalArgumentException(
@@ -98,6 +100,11 @@ public class StockAddPopup extends JFrame {
 			StockItem newItem = new StockItem(id, name, description, price,
 					quantity);
 			model.getWarehouseTableModel().addItem(newItem);
+			PurchaseItemPanel.productField.removeAllItems();
+			for (StockItem sItem : model.getWarehouseTableModel()
+					.getTableRows()) {
+				PurchaseItemPanel.productField.addItem(sItem);
+			}
 			frame.dispose();
 		} catch (IllegalArgumentException e) {
 			String message = e.getMessage();

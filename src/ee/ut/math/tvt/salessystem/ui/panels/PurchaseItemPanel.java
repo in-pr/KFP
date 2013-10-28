@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -39,7 +40,7 @@ public class PurchaseItemPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	// Product dropdown field
-	private JComboBox<StockItem> productField;
+	public static JComboBox<StockItem> productField;
 
 	// Text field on the dialogPane
 	private JTextField barCodeField;
@@ -105,8 +106,7 @@ public class PurchaseItemPanel extends JPanel {
 					StockItem selectedItem = (StockItem) productField
 							.getSelectedItem();
 					barCodeField.setText(selectedItem.getId().toString());
-					nameField.setText(selectedItem.getName());
-					priceField.setText(String.valueOf(selectedItem.getPrice()));
+					fillDialogFields();
 				}
 			}
 		});
@@ -123,7 +123,18 @@ public class PurchaseItemPanel extends JPanel {
 			}
 
 			public void focusLost(FocusEvent e) {
-				fillDialogFields();
+				// fillDialogFields();
+				ComboBoxModel<StockItem> elems = productField.getModel();
+				for (int i = 0; i < elems.getSize(); i++) {
+					StockItem sItem = elems.getElementAt(i);
+					try {
+						if (sItem.getId() == Long.valueOf(barCodeField
+								.getText())) {
+							productField.setSelectedIndex(i);
+						}
+					} catch (NumberFormatException ex) {
+					}
+				}
 			}
 		});
 
