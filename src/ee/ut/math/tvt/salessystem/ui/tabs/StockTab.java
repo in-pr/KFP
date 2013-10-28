@@ -1,10 +1,15 @@
 package ee.ut.math.tvt.salessystem.ui.tabs;
 
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.salessystem.ui.popups.StockAddPopup;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -58,6 +63,12 @@ public class StockTab {
 		gc.weightx = 0;
 
 		addItem = new JButton("Add");
+		addItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new StockAddPopup(model);
+			}
+		});
 		gc.gridwidth = GridBagConstraints.RELATIVE;
 		gc.weightx = 1.0;
 		panel.add(addItem, gc);
