@@ -46,14 +46,16 @@ public class PurchaseConfirmPopup extends JFrame {
 
 			public void focusLost(FocusEvent e) {
 				try {
-					change.setText(String.valueOf(Double.valueOf(payment
-							.getText()) - total));
+					change.setText(String.format("%.2g%n",
+							Double.valueOf(payment.getText()) - total));
 				} catch (NumberFormatException ex) {
-					JOptionPane
-							.showMessageDialog(PurchaseConfirmPopup.this,
-									"Payment must be a number!",
-									"Purchase not completed",
-									JOptionPane.PLAIN_MESSAGE);
+					if (!payment.getText().equals("")) {
+						JOptionPane.showMessageDialog(
+								PurchaseConfirmPopup.this,
+								"Payment must be a number!",
+								"Purchase not completed",
+								JOptionPane.PLAIN_MESSAGE);
+					}
 				}
 			}
 		});
