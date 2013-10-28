@@ -205,14 +205,25 @@ public class PurchaseItemPanel extends JPanel {
 			} catch (NumberFormatException ex) {
 				quantity = 1;
 			}
-			if (stockItem.getQuantity() < quantity) {
-				JOptionPane.showMessageDialog(this, "Item out of stock!",
-						"Warning message", JOptionPane.PLAIN_MESSAGE);
-				return;
+			int totalQuantity = quantity;
+			for (SoldItem sItem : model.getCurrentPurchaseTableModel()
+					.getTableRows()) {
+				if (sItem.getStockItem().getId() == stockItem.getId()) {
+					totalQuantity += sItem.getQuantity();
+				}
 			}
-			model.getCurrentPurchaseTableModel().addItem(
-					new SoldItem(stockItem, quantity));
-			stockItem.setQuantity(stockItem.getQuantity() - quantity);
+			if (stockItem.getQuantity() < totalQuantity) {
+				String triedToAdd = String.valueOf(quantity);
+				String leftInStock = String.valueOf(stockItem.getQuantity()
+						- totalQuantity + quantity);
+				String messageText = "Item out of stock! Attempted to add "
+						+ triedToAdd + "; " + leftInStock + " left in stock.";
+				JOptionPane.showMessageDialog(this, messageText,
+						"Warning message", JOptionPane.PLAIN_MESSAGE);
+			} else {
+				model.getCurrentPurchaseTableModel().addItem(
+						new SoldItem(stockItem, quantity));
+			}
 		}
 	}
 
