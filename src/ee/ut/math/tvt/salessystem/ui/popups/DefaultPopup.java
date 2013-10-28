@@ -33,7 +33,7 @@ public class DefaultPopup extends JFrame {
 		panel.setBorder(BorderFactory.createTitledBorder(title));
 		for (Entry<String, JTextField> elem : elements.entrySet()) {
 			panel.add(new JLabel(elem.getKey()));
-			elem.getValue().setEditable(editable);
+			elem.getValue().setEditable(editable || elem.getKey().equals("Payment:"));
 			panel.add(elem.getValue());
 		}
 		return panel;

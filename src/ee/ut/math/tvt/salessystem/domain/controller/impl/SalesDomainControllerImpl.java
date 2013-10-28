@@ -9,6 +9,7 @@ import ee.ut.math.tvt.salessystem.domain.data.HistoryItem;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.salessystem.ui.popups.PurchaseConfirmPopup;
 
 /**
  * Implementation of the sales domain controller.
@@ -29,7 +30,9 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		HistoryItem newHistoryItem = new HistoryItem(goods);
 		model.getHistoryTableModel().addItem(newHistoryItem);
 		for (SoldItem sItem : goods) {
-			sItem.getStockItem().setQuantity(sItem.getStockItem().getQuantity() - sItem.getQuantity());
+			sItem.getStockItem().setQuantity(
+					sItem.getStockItem().getQuantity()
+							- sItem.getQuantity());
 		}
 	}
 
