@@ -102,7 +102,8 @@ public class PurchaseItemPanel extends JPanel {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-					StockItem selectedItem = (StockItem) productField.getSelectedItem();
+					StockItem selectedItem = (StockItem) productField
+							.getSelectedItem();
 					barCodeField.setText(selectedItem.getId().toString());
 					nameField.setText(selectedItem.getName());
 					priceField.setText(String.valueOf(selectedItem.getPrice()));

@@ -15,7 +15,7 @@ public class Intro {
 
 	private static final Logger log = Logger.getLogger(Intro.class);
 	private static final String MODE = "console";
-	
+
 	public static void main(String[] args) {
 		final SalesDomainController domainController = new SalesDomainControllerImpl();
 
@@ -27,7 +27,7 @@ public class Intro {
 		} else {
 			Properties application = getParams("application");
 			Properties version = getParams("version");
-			
+
 			IntroUI introUI = new IntroUI(application,
 					version.getProperty("build.major.number") + "."
 							+ version.getProperty("build.minor.number") + "."
@@ -46,15 +46,15 @@ public class Intro {
 			}
 			introUI.setVisible(false);
 		}
-		
+
 		/*
-		Properties application = getParams("application");
-		Properties version = getParams("version");
-		IntroUI teaminfo = new IntroUI(application,
-				version.getProperty("build.major.number") + "."
-						+ version.getProperty("build.minor.number") + "."
-						+ version.getProperty("build.revision.number"));
-		teaminfo.setVisible(true);*/
+		 * Properties application = getParams("application"); Properties version
+		 * = getParams("version"); IntroUI teaminfo = new IntroUI(application,
+		 * version.getProperty("build.major.number") + "." +
+		 * version.getProperty("build.minor.number") + "." +
+		 * version.getProperty("build.revision.number"));
+		 * teaminfo.setVisible(true);
+		 */
 	}
 
 	private static Properties getParams(String filename) {
