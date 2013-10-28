@@ -45,10 +45,10 @@ public class StockAddPopup extends JFrame {
 		elements.put(quantityField, new JTextField());
 
 		// Make the window
-		frame = new DefaultPopup(title, 400, 280);
+		frame = new DefaultPopup(title, 400, 280, 1);
 
 		// Make the panel
-		JPanel panel = frame.makePanel(title, elements);
+		JPanel panel = frame.makePanel(title, elements, true);
 
 		// Add ok button
 		JButton okButton = new JButton("Add product");

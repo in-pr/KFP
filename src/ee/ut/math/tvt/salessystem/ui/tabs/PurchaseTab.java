@@ -156,7 +156,7 @@ public class PurchaseTab {
 			log.debug("Contents of the current basket:\n"
 					+ model.getCurrentPurchaseTableModel());
 			domainController.submitCurrentPurchase(model
-					.getCurrentPurchaseTableModel().getTableRows());
+					.getCurrentPurchaseTableModel().getTableRows(), model);
 			endSale();
 			model.getCurrentPurchaseTableModel().clear();
 		} catch (VerificationFailedException e1) {

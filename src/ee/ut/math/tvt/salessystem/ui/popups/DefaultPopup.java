@@ -17,22 +17,23 @@ public class DefaultPopup extends JFrame {
 	private static final long serialVersionUID = 1L; // class version
 
 	// constructs the user interface
-	public DefaultPopup(String title, int width, int height) {
+	public DefaultPopup(String title, int width, int height, int components) {
 		super(title);
 		setSize(width, height);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((screen.width - width) / 2, (screen.height - height) / 2);
+		setLayout(new GridLayout(components, 1));
 	}
 
 	// makes the panel
-	public JPanel makePanel(String title, Map<String, JTextField> elements) {
+	public JPanel makePanel(String title, Map<String, JTextField> elements, boolean editable) {
 		// Create the panel
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(elements.size() + 1, 2));
-		// panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.setBorder(BorderFactory.createTitledBorder(title));
 		for (Entry<String, JTextField> elem : elements.entrySet()) {
 			panel.add(new JLabel(elem.getKey()));
+			elem.getValue().setEditable(editable);
 			panel.add(elem.getValue());
 		}
 		return panel;
