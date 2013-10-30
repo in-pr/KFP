@@ -10,6 +10,7 @@ import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.popups.PurchaseConfirmPopup;
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 /**
  * Implementation of the sales domain controller.
@@ -31,8 +32,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		model.getHistoryTableModel().addItem(newHistoryItem);
 		for (SoldItem sItem : goods) {
 			sItem.getStockItem().setQuantity(
-					sItem.getStockItem().getQuantity()
-							- sItem.getQuantity());
+					sItem.getStockItem().getQuantity() - sItem.getQuantity());
 		}
 	}
 
@@ -63,6 +63,10 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		dataset.add(beer);
 
 		return dataset;
+	}
+
+	public void endSession() {
+		HibernateUtil.closeSession();
 	}
 
 }
