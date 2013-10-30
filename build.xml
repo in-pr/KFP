@@ -13,6 +13,13 @@
 
 	<property name="main.class" value="ee.ut.math.tvt.kungfupandas.Intro" />
 
+	<!-- database variables -->
+
+	<property name="data.dir" value="${basedir}/data" />
+	<property name="db.file" value="${data.dir}/POSdb" />
+	<property name="db.alias" value="POS" />
+	<property name="db.url" value="jdbc:hsqldb:hsql://localhost/POS" />
+
 	<!-- defines classpath variants used for different tasks -->
 
 	<path id="compile.classpath">
@@ -24,7 +31,7 @@
 		<path refid="compile.classpath" />
 	</path>
 
-	
+
 	<macrodef name="git">
 		<attribute name="command" />
 		<attribute name="dir" default="" />
@@ -33,11 +40,11 @@
 			<echo message="git @{command}" />
 			<exec executable="git" dir="@{dir}">
 				<arg value="@{command}" />
-				<args/>
+				<args />
 			</exec>
 		</sequential>
 	</macrodef>
-	
+
 	<!-- defines runnable ant targets -->
 
 	<target name="clean" description="Removes the files created during the previous build.">
@@ -48,13 +55,13 @@
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${classes.dir}" />
 		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="compile.classpath" includeantruntime="false" />
-		<copy file="${basedir}/log4j.properties" todir="${classes.dir}" overwrite="true" />
+		<copy file="${src.dir}/log4j.properties" todir="${classes.dir}" overwrite="true" />
 	</target>
 
 	<target name="run" depends="build" description="Executes your application via class Intro.">
-		<java classname="${main.class}" classpathref="test.classpath" fork="yes" >
-	    <jvmarg value="-Xdebug" />
-	    <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
+		<java classname="${main.class}" classpathref="test.classpath" fork="yes">
+			<jvmarg value="-Xdebug" />
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
 		</java>
 	</target>
 
@@ -75,14 +82,14 @@
 	<target name="jrun" description="Opens your intro window using the JAR file created by dist ANT target.">
 		<java jar="${jar.dir}/${app.team.name}.jar" fork="yes" />
 	</target>
-	
+
 	<target name="runc" depends="build" description="Run the application (console)">
 		<java classname="${main.class}" classpathref="test.classpath" fork="yes">
 			<arg value="console" />
 		</java>
 	</target>
-	
-	
+
+
 	<target name="git_commit" description=" make a commit to the local repository and push changes to the GitHub server">
 		<input message="Commit message" addproperty="commit-message" />
 		<git command="add">
@@ -115,7 +122,7 @@
 				<arg value="${tag_comment}" />
 			</args>
 		</git>
-	    <input message="User name: " addproperty="USERNAME" />
+		<input message="User name: " addproperty="USERNAME" />
 		<input message="Password: " addproperty="PASSWORD" />
 		<git command="push">
 			<args>
@@ -123,7 +130,18 @@
 				<arg value="https://${USERNAME}:${PASSWORD}@github.com/in-pr/KFP.git" />
 			</args>
 		</git>
-		
+	</target>
+
+	<target name="dbmanager" description="Start the HSQLDB manager">
+		<java classname="org.hsqldb.util.DatabaseManagerSwing" classpathref="test.classpath" fork="yes">
+			<arg line="--user sa --url ${db.url}" />
+		</java>
+	</target>
+
+	<target name="startdb" description="Start the HSQLDB with the default params">
+		<java classname="org.hsqldb.Server" classpathref="test.classpath" fork="yes">
+			<arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" />
+		</java>
 	</target>
 
 </project>
