@@ -56,6 +56,7 @@
 		<mkdir dir="${classes.dir}" />
 		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="compile.classpath" includeantruntime="false" />
 		<copy file="${src.dir}/log4j.properties" todir="${classes.dir}" overwrite="true" />
+		<copy file="${src.dir}/hibernate.cfg.xml" todir="${classes.dir}" overwrite="true" />
 	</target>
 
 	<target name="run" depends="build" description="Executes your application via class Intro.">
