@@ -20,38 +20,39 @@ import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 @Entity
 @Table(name = "SOLDITEM")
 public class SoldItem implements Cloneable, DisplayableItem {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "STOCKITEM_ID", nullable = false)
+	@JoinColumn(name = "STOCKITEM_ID", nullable = false)
 	private StockItem stockItem;
 
 	@ManyToOne
-    @JoinColumn(name = "SALE_ID", nullable = false)
+	@JoinColumn(name = "SALE_ID", nullable = false)
 	private HistoryItem historyItem;
-	
+
 	@Column(name = "NAME")
 	private String name;
-	
+
 	@Column(name = "QUANTITY")
 	private Integer quantity;
-	
+
 	@Column(name = "ITEMPRICE")
 	private double price;
+
+	public SoldItem() {
+	}
 
 	public SoldItem(StockItem stockItem, int quantity) {
 		this.stockItem = stockItem;
 		this.name = stockItem.getName();
 		this.price = stockItem.getPrice();
 		this.quantity = quantity;
-		
+
 	}
 
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -94,6 +95,14 @@ public class SoldItem implements Cloneable, DisplayableItem {
 
 	public void setStockItem(StockItem stockItem) {
 		this.stockItem = stockItem;
+	}
+
+	public HistoryItem getHistoryItem() {
+		return historyItem;
+	}
+
+	public void setHistoryItem(HistoryItem historyItem) {
+		this.historyItem = historyItem;
 	}
 
 }

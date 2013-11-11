@@ -24,7 +24,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(mappedBy = "id")
+	@OneToMany(mappedBy = "historyItem")
 	private List<SoldItem> goods;
 
 	@Column(name = "SOLD_DATE")
