@@ -5,12 +5,24 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class HistoryItem implements Cloneable, DisplayableItem {
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	
 	private List<SoldItem> goods;
 
+	@Column(name = "DATE")
 	private Date date;
+	
+	@Column(name = "TOTAL")
 	private double total;
 
 	public HistoryItem(List<SoldItem> goods) {
