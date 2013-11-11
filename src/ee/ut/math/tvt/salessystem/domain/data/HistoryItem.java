@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 public class HistoryItem implements Cloneable, DisplayableItem {
 
@@ -16,7 +17,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
+	@OneToMany(mappedBy = "soldItem")
 	private List<SoldItem> goods;
 
 	@Column(name = "DATE")

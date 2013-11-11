@@ -25,6 +25,10 @@ public class SoldItem implements Cloneable, DisplayableItem {
     @JoinColumn(name = "STOCKITEM_ID", nullable = false)
 	private StockItem stockItem;
 
+	@ManyToOne
+    @JoinColumn(name = "HISTORYITEM_ID", nullable = false)
+	private HistoryItem historyItem;
+	
 	@Column(name = "NAME")
 	private String name;
 	
