@@ -64,7 +64,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 		return dataset;
 	}
-
+	
 	public void endSession() {
 		HibernateUtil.closeSession();
 	}
