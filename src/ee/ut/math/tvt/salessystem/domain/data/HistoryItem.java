@@ -23,7 +23,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@OneToMany(mappedBy = "soldItem")
 	private List<SoldItem> goods;
 
-	@Column(name = "DATE")
+	@Column(name = "SOLD_DATE")
 	private Date date;
 	
 	@Column(name = "TOTAL")
