@@ -48,7 +48,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		// XXX mock implementation
 		List<StockItem> dataset = new ArrayList<StockItem>();
 
-		StockItem chips = new StockItem(1l, "Lays chips", "Potato chips", 11.0,
+		/*StockItem chips = new StockItem(1l, "Lays chips", "Potato chips", 11.0,
 				5);
 		StockItem chupaChups = new StockItem(2l, "Chupa-chups", "Sweets", 8.0,
 				8);
@@ -60,7 +60,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		dataset.add(chips);
 		dataset.add(chupaChups);
 		dataset.add(frankfurters);
-		dataset.add(beer);
+		dataset.add(beer);*/
 
 		return dataset;
 	}

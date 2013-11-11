@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.Session;
+
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
+
 
 
 /**
@@ -51,10 +55,7 @@ public class StockItem implements Cloneable, DisplayableItem {
 	 *            price of the product
 	 */
 	public StockItem(Long id, String name, String desc, double price) {
-		this.id = id;
-		this.name = name;
-		this.description = desc;
-		this.price = price;
+		this(id, name, desc, price, 0);
 	}
 
 	public StockItem(Long id, String name, String desc, double price,
@@ -64,6 +65,7 @@ public class StockItem implements Cloneable, DisplayableItem {
 		this.description = desc;
 		this.price = price;
 		this.quantity = quantity;
+		this.saveStockItem();
 	}
 
 	/**
@@ -72,6 +74,13 @@ public class StockItem implements Cloneable, DisplayableItem {
 	public StockItem() {
 	}
 
+	public void saveStockItem(){
+		Session em = HibernateUtil.currentSession();
+		em.getTransaction().begin();
+		em.persist(this);		 
+		em.getTransaction().commit();
+	}
+	
 	public String getDescription() {
 		return description;
 	}
