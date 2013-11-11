@@ -30,7 +30,7 @@ public class StockItem implements Cloneable, DisplayableItem {
 	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "ITEMPRICE")
+	@Column(name = "PRICE")
 	private double price;
 
 	@Column(name = "DESCRIPTION")
@@ -77,7 +77,7 @@ public class StockItem implements Cloneable, DisplayableItem {
 	public void saveStockItem(){
 		Session em = HibernateUtil.currentSession();
 		em.getTransaction().begin();
-		em.persist(this);		 
+		em.save(this);		 
 		em.getTransaction().commit();
 	}
 	
