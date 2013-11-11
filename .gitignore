@@ -1,4 +1,6 @@
 /bin
 /build
+/data/POSdb.lck
+/data/POSdb.log
 .DS_Store
 Thumbs.db
