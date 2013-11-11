@@ -33,6 +33,9 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@Column(name = "TOTAL")
 	private double total;
 
+	public HistoryItem(){
+	}
+	
 	public HistoryItem(List<SoldItem> goods) {
 		Calendar cal = Calendar.getInstance();
 		this.date = cal.getTime();
