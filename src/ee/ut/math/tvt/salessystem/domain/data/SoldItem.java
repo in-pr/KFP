@@ -9,6 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.Session;
+
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
+
 /**
  * Already bought StockItem. SoldItem duplicates name and price for preserving
  * history.
@@ -26,7 +30,7 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	private StockItem stockItem;
 
 	@ManyToOne
-    @JoinColumn(name = "HISTORYITEM_ID", nullable = false)
+    @JoinColumn(name = "SALE_ID", nullable = false)
 	private HistoryItem historyItem;
 	
 	@Column(name = "NAME")
@@ -43,9 +47,11 @@ public class SoldItem implements Cloneable, DisplayableItem {
 		this.name = stockItem.getName();
 		this.price = stockItem.getPrice();
 		this.quantity = quantity;
-
+		
 	}
 
+	
+	
 	public Long getId() {
 		return id;
 	}

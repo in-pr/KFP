@@ -41,13 +41,16 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		for (SoldItem soldItem : goods) {
 			this.total += soldItem.getSum();
 		}
+		
 		this.saveHistoryItem();
 	}
 
 	public void saveHistoryItem(){
 		Session em = HibernateUtil.currentSession();
 		em.getTransaction().begin();
-		
+		for(SoldItem solditem : goods){
+			em.persist(solditem);
+		}
 		em.persist(this);
 		 
 		em.getTransaction().commit();
