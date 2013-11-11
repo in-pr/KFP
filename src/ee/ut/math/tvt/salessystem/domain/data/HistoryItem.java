@@ -12,6 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.Session;
+
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 @Entity
 @Table(name = "HISTORY")
 public class HistoryItem implements Cloneable, DisplayableItem {
@@ -37,8 +41,18 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		for (SoldItem soldItem : goods) {
 			this.total += soldItem.getSum();
 		}
+		this.saveHistoryItem();
 	}
 
+	public void saveHistoryItem(){
+		Session em = HibernateUtil.currentSession();
+		em.getTransaction().begin();
+		
+		em.persist(this);
+		 
+		em.getTransaction().commit();
+	}
+	
 	@Override
 	public Long getId() {
 		return id;
