@@ -97,8 +97,12 @@ public class PurchaseItemPanel extends JPanel {
 		panel.setBorder(BorderFactory.createTitledBorder("Product"));
 
 		// Initialize the dropdown
-		productField = new JComboBox<StockItem>(model.getWarehouseTableModel()
-				.getTableRows().toArray(new StockItem[0]));
+		productField = new JComboBox<StockItem>();
+		productField.addItem(null);
+		for (StockItem x : model.getWarehouseTableModel().getTableRows()
+				.toArray(new StockItem[0])) {
+			productField.addItem(x);
+		}
 		productField.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
