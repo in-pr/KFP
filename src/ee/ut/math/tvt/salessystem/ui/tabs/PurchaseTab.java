@@ -105,11 +105,8 @@ public class PurchaseTab {
 		JButton b = new JButton("Confirm");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				double total = 0;
-				for (SoldItem sItem : model.getCurrentPurchaseTableModel().getTableRows()) {
-					total += sItem.getSum();
-				}
-				new PurchaseConfirmPopup(total, model, PurchaseTab.this);
+				new PurchaseConfirmPopup(model.getCurrentPurchaseTableModel()
+						.getSum(), model, PurchaseTab.this);
 			}
 		});
 		b.setEnabled(false);
