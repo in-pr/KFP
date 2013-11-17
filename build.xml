@@ -10,6 +10,9 @@
 	<property name="jar.dir" value="${build.dir}/jar" />
 	<property name="lib.dir" value="${basedir}/lib" />
 	<property name="src.dir" value="${basedir}/src" />
+	
+	<property name="test.classes.dir" value="${build.dir}/tests" />
+	<property name="test.src.dir" value="${basedir}/test" />
 
 	<property name="main.class" value="ee.ut.math.tvt.kungfupandas.Intro" />
 
@@ -143,6 +146,22 @@
 		<java classname="org.hsqldb.Server" classpathref="test.classpath" fork="yes">
 			<arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" />
 		</java>
+	</target>
+	
+	<target name="build-tests" depends="build" description="Compiles the junit test files.">
+		<mkdir dir="${test.classes.dir}" />
+		<javac srcdir="${test.src.dir}" destdir="${test.classes.dir}" classpathref="compile.classpath" includeantruntime="false" />
+	</target>
+	
+	<target name="test" depends="build-tests" description="Run the template application">
+		<junit>
+			<classpath refid="test.classpath" />
+
+			<formatter type="brief" usefile="false" />
+			<batchtest>
+				<fileset dir="${test.classes.dir}" includes="**/*.class" />
+			</batchtest>
+		</junit>
 	</target>
 
 </project>
