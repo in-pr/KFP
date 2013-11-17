@@ -9,7 +9,7 @@ import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 public class PurchaseInfoTableModelTest {
-	
+
 	PurchaseInfoTableModel pit;
 	SoldItem item1, item2, item3, item4;
 
@@ -17,26 +17,33 @@ public class PurchaseInfoTableModelTest {
 	public void setUp() throws Exception {
 		pit = new PurchaseInfoTableModel();
 		item1 = new SoldItem(new StockItem(1L, "Lauaviin", "viin", 3.50), 3);
+		item2 = new SoldItem(new StockItem(1L, "Hapukurk", "sakuska", 0.40), 10);
+		item3 = new SoldItem(new StockItem(1L, "Pirni Fizz", "siider", 2.00), 1);
 	}
 
 	@Test
 	public void testAddSoldItem() {
-		fail("Not yet implemented");
+		pit.addItem(item1);
+		assertEquals(1, pit.getRowCount());
 	}
 
 	@Test
 	public void testGetSumWithNoItems() {
-		pit.getSum();
+		assertEquals(0.00, pit.getSum(), 0.0001);
 	}
 
 	@Test
 	public void testGetSumWithOneItem() {
 		pit.addItem(item1);
+		assertEquals(10.50, pit.getSum(), 0.0001);
 	}
 
 	@Test
 	public void testGetSumWithMultipleItems() {
-		fail("Not yet implemented");
+		pit.addItem(item1);
+		pit.addItem(item2);
+		pit.addItem(item3);
+		assertEquals(16.50, pit.getSum(), 0.0001);
 	}
 
 }
