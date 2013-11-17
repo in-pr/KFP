@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.salessystem.ui.model;
+package ee.ut.math.tvt.salessystem.domain.data;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
