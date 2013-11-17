@@ -69,4 +69,16 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 				+ item.getQuantity());
 		fireTableDataChanged();
 	}
+
+	/**
+	 * Calculates total price of all objects in cart.
+	 */
+	public double getSum() {
+		double total = 0.0;
+		for (SoldItem sItem : getTableRows()) {
+			total += sItem.getSum();
+		}
+		return total;
+	}
+
 }

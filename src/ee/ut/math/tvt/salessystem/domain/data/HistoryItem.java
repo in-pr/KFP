@@ -45,7 +45,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 			this.total += soldItem.getSum();
 		}
 		
-		this.saveHistoryItem();
+		//this.saveHistoryItem();
 	}
 
 	public void saveHistoryItem(){

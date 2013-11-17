@@ -10,7 +10,7 @@
 	<property name="jar.dir" value="${build.dir}/jar" />
 	<property name="lib.dir" value="${basedir}/lib" />
 	<property name="src.dir" value="${basedir}/src" />
-	
+
 	<property name="test.classes.dir" value="${build.dir}/tests" />
 	<property name="test.src.dir" value="${basedir}/test" />
 
@@ -29,11 +29,17 @@
 		<fileset dir="${lib.dir}" includes="**/*.jar" />
 	</path>
 
-	<path id="test.classpath">
+	<path id="run.classpath">
 		<pathelement location="${classes.dir}" />
 		<path refid="compile.classpath" />
 	</path>
 
+	<path id="test.classpath">
+		<pathelement location="${test.classes.dir}" />
+		<path refid="run.classpath" />
+	</path>
+
+	<!-- defines git macro -->
 
 	<macrodef name="git">
 		<attribute name="command" />
@@ -63,7 +69,7 @@
 	</target>
 
 	<target name="run" depends="build" description="Executes your application via class Intro.">
-		<java classname="${main.class}" classpathref="test.classpath" fork="yes">
+		<java classname="${main.class}" classpathref="run.classpath" fork="yes">
 			<jvmarg value="-Xdebug" />
 			<jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
 		</java>
@@ -88,7 +94,7 @@
 	</target>
 
 	<target name="runc" depends="build" description="Run the application (console)">
-		<java classname="${main.class}" classpathref="test.classpath" fork="yes">
+		<java classname="${main.class}" classpathref="run.classpath" fork="yes">
 			<arg value="console" />
 		</java>
 	</target>
@@ -137,26 +143,25 @@
 	</target>
 
 	<target name="dbmanager" description="Start the HSQLDB manager">
-		<java classname="org.hsqldb.util.DatabaseManagerSwing" classpathref="test.classpath" fork="yes">
+		<java classname="org.hsqldb.util.DatabaseManagerSwing" classpathref="run.classpath" fork="yes">
 			<arg line="--user sa --url ${db.url}" />
 		</java>
 	</target>
 
 	<target name="startdb" description="Start the HSQLDB with the default params">
-		<java classname="org.hsqldb.Server" classpathref="test.classpath" fork="yes">
+		<java classname="org.hsqldb.Server" classpathref="run.classpath" fork="yes">
 			<arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" />
 		</java>
 	</target>
-	
-	<target name="build-tests" depends="build" description="Compiles the junit test files.">
+
+	<target name="build-tests" depends="build" description="Compiles unit tests.">
 		<mkdir dir="${test.classes.dir}" />
-		<javac srcdir="${test.src.dir}" destdir="${test.classes.dir}" classpathref="compile.classpath" includeantruntime="false" />
+		<javac srcdir="${test.src.dir}" destdir="${test.classes.dir}" classpathref="run.classpath" includeantruntime="false" />
 	</target>
-	
-	<target name="test" depends="build-tests" description="Run the template application">
+
+	<target name="test" depends="build-tests" description="Run unit tests.">
 		<junit>
 			<classpath refid="test.classpath" />
-
 			<formatter type="brief" usefile="false" />
 			<batchtest>
 				<fileset dir="${test.classes.dir}" includes="**/*.class" />
