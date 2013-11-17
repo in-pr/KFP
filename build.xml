@@ -156,7 +156,7 @@
 
 	<target name="build-tests" depends="build" description="Compiles unit tests.">
 		<mkdir dir="${test.classes.dir}" />
-		<javac srcdir="${test.src.dir}" destdir="${test.classes.dir}" classpathref="compile.classpath" includeantruntime="false" />
+		<javac srcdir="${test.src.dir}" destdir="${test.classes.dir}" classpathref="run.classpath" includeantruntime="false" />
 	</target>
 
 	<target name="test" depends="build-tests" description="Run unit tests.">

@@ -5,15 +5,27 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+
 public class StockTableModelTest {
 
+	StockItem item1;
+	StockItem item2;
+	StockItem item3;
 	@Before
 	public void setUp() throws Exception {
+		item1=new StockItem(1L, "Lauaviin1", "viin", 4.0, 1);
+		item2=new StockItem(1L, "Lauaviin1", "viin", 4.0, 2);
+		
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testValidateNameUniqueness() {
+		StockTableModel stockTableModel=new StockTableModel();
+		stockTableModel.addItem(item1);
+		stockTableModel.addItem(item2);
+		stockTableModel.addItem(item1);
+		assertEquals(1,stockTableModel.getRowCount());
 	}
 
 }
