@@ -36,7 +36,7 @@ public class HistoryViewPopup extends JFrame {
 	private String dateField = "Date:";
 	private String timeField = "Time:";
 	private String totalField = "Total:";
-	
+
 	// builds add product panel
 	public HistoryViewPopup(HistoryItem historyItem, SalesSystemModel model) {
 		String title = "View purchase";
@@ -77,7 +77,6 @@ public class HistoryViewPopup extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 
 		basketPane.add(scrollPane, getBacketScrollPaneConstraints());
-		
 
 		return basketPane;
 	}

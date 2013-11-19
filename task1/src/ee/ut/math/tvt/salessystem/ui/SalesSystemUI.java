@@ -40,7 +40,7 @@ public class SalesSystemUI extends JFrame {
 	private PurchaseTab purchaseTab;
 	private HistoryTab historyTab;
 	private StockTab stockTab;
-	
+
 	/**
 	 * Constructs sales system GUI.
 	 * 
@@ -50,7 +50,7 @@ public class SalesSystemUI extends JFrame {
 	public SalesSystemUI(final SalesDomainController domainController) {
 		this.domainController = domainController;
 		this.model = new SalesSystemModel(domainController);
-		
+
 		// Create singleton instances of the tab classes
 		historyTab = new HistoryTab(model);
 		stockTab = new StockTab(model);
@@ -74,9 +74,6 @@ public class SalesSystemUI extends JFrame {
 		setSize(width, height);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((screen.width - width) / 2, (screen.height - height) / 2);
-
-		
-		
 
 		addWindowListener(new WindowAdapter() {
 			@Override

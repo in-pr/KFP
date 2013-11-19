@@ -26,14 +26,16 @@ public class DefaultPopup extends JFrame {
 	}
 
 	// makes the panel
-	public JPanel makePanel(String title, Map<String, JTextField> elements, boolean editable) {
+	public JPanel makePanel(String title, Map<String, JTextField> elements,
+			boolean editable) {
 		// Create the panel
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(elements.size() + 1, 2));
 		panel.setBorder(BorderFactory.createTitledBorder(title));
 		for (Entry<String, JTextField> elem : elements.entrySet()) {
 			panel.add(new JLabel(elem.getKey()));
-			elem.getValue().setEditable(editable || elem.getKey().equals("Payment:"));
+			elem.getValue().setEditable(
+					editable || elem.getKey().equals("Payment:"));
 			panel.add(elem.getValue());
 		}
 		return panel;

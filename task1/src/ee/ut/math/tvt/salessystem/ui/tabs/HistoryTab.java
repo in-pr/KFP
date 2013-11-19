@@ -96,7 +96,8 @@ public class HistoryTab {
 			public void mouseClicked(MouseEvent e) {
 				JTable target = (JTable) e.getSource();
 				int row = target.getSelectedRow();
-				new HistoryViewPopup(model.getHistoryTableModel().getTableRows().get(row), model);
+				new HistoryViewPopup(model.getHistoryTableModel()
+						.getTableRows().get(row), model);
 			}
 		});
 

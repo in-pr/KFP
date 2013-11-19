@@ -14,8 +14,6 @@ import org.hibernate.Session;
 
 import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
-
-
 /**
  * Stock item. Corresponds to the Data Transfer Object design pattern.
  */
@@ -24,7 +22,7 @@ import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 public class StockItem implements Cloneable, DisplayableItem {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "NAME")
@@ -38,9 +36,9 @@ public class StockItem implements Cloneable, DisplayableItem {
 
 	@Column(name = "QUANTITY")
 	private int quantity;
-	
+
 	@OneToMany(mappedBy = "stockItem")
-    private Set<SoldItem> soldItems;
+	private Set<SoldItem> soldItems;
 
 	/**
 	 * Constucts new <code>StockItem</code> with the specified values.
@@ -65,7 +63,7 @@ public class StockItem implements Cloneable, DisplayableItem {
 		this.description = desc;
 		this.price = price;
 		this.quantity = quantity;
-		//this.saveStockItem();
+		// this.saveStockItem();
 	}
 
 	/**
@@ -74,13 +72,13 @@ public class StockItem implements Cloneable, DisplayableItem {
 	public StockItem() {
 	}
 
-	public void saveStockItem(){
+	public void saveStockItem() {
 		Session em = HibernateUtil.currentSession();
 		em.getTransaction().begin();
-		em.save(this);		 
+		em.save(this);
 		em.getTransaction().commit();
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}

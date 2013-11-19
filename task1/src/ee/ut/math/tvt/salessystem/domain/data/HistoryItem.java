@@ -16,54 +16,55 @@ import javax.persistence.Table;
 import org.hibernate.Session;
 
 import ee.ut.math.tvt.salessystem.util.HibernateUtil;
+
 @Entity
 @Table(name = "HISTORY")
 public class HistoryItem implements Cloneable, DisplayableItem {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@OneToMany(mappedBy = "historyItem")
 	private List<SoldItem> goods;
 
 	@Column(name = "SOLD_DATE")
 	private Date date;
-	
+
 	@Column(name = "TOTAL")
 	private double total;
 
-	public HistoryItem(){
+	public HistoryItem() {
 	}
-	
+
 	public HistoryItem(List<SoldItem> goods) {
 		Calendar cal = Calendar.getInstance();
 		this.date = cal.getTime();
 		this.total = 0;
-				this.goods = goods;
+		this.goods = goods;
 		for (SoldItem soldItem : goods) {
 			this.total += soldItem.getSum();
 		}
-		
-		//this.saveHistoryItem();
+
+		// this.saveHistoryItem();
 	}
 
-	public void saveHistoryItem(){
+	public void saveHistoryItem() {
 		Session em = HibernateUtil.currentSession();
 		em.getTransaction().begin();
-		for(SoldItem solditem : goods){
+		for (SoldItem solditem : goods) {
 			em.persist(solditem);
 		}
 		em.persist(this);
-		 
+
 		em.getTransaction().commit();
 	}
-	
+
 	@Override
 	public Long getId() {
 		return id;
 	}
-	
+
 	public List<SoldItem> getGoods() {
 		return goods;
 	}
