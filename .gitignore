@@ -1,9 +1,11 @@
-.DS_Store
-Thumbs.db
-/bin
-/build
-/data/POSdb.lck
-/data/POSdb.log
+/.DS_Store
+/task1/.DS_Store
+/task2/.DS_Store
+/task1/Thumbs.db
+/task1/bin
+/task1/build
+/task1/data/POSdb.lck
+/task1/data/POSdb.log
 /task2/bin
 /task2/build
 /task2/data/POSdb.lck
