@@ -24,7 +24,14 @@ public class PurchaseInfoTableModelTest {
 	@Test
 	public void testAddSoldItem() {
 		pit.addItem(item1);
-		assertEquals(1, pit.getRowCount());
+		SoldItem mItem = pit.getTableRows().get(0);
+		
+		assertEquals(item1.getStockItem().getId(), mItem.getStockItem().getId());
+		assertEquals(item1.getStockItem().getName(), mItem.getStockItem().getName());
+		assertEquals(item1.getStockItem().getDescription(), mItem.getStockItem().getDescription());
+		assertEquals(item1.getStockItem().getPrice(), mItem.getStockItem().getPrice(), 0.0001);
+		assertEquals(item1.getStockItem().getQuantity(), mItem.getStockItem().getQuantity());
+		assertEquals(item1.getQuantity(), mItem.getQuantity());
 	}
 
 	@Test
