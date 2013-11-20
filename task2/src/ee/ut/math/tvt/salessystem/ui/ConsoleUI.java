@@ -138,6 +138,7 @@ public class ConsoleUI {
 			} catch (VerificationFailedException e) {
 				log.error(e.getMessage());
 			}
+			
 
 		} else if (c[0].equals("r")) {
 
