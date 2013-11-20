@@ -121,7 +121,7 @@ public class ConsoleUI {
 
 		} else if (c[0].equals("s")) {
 			selectClient();
-
+    
 		} else if (c[0].equals("p")) {
 			if (selectedClient == null) {
 				System.out.println("You must select a client first!");
