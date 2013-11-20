@@ -2,12 +2,15 @@
 /task1/.DS_Store
 /task2/.DS_Store
 /task1/Thumbs.db
+
 /task1/bin
 /task1/build
+/task1/data/POSdb.tmp
 /task1/data/POSdb.lck
 /task1/data/POSdb.log
+
 /task2/bin
 /task2/build
+/task2/data/POSdb.tmp
 /task2/data/POSdb.lck
 /task2/data/POSdb.log
-/task2/log/POS-task2.log

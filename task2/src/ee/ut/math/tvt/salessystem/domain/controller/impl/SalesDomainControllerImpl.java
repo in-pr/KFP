@@ -1,5 +1,12 @@
 package ee.ut.math.tvt.salessystem.domain.controller.impl;
 
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.data.Client;
 import ee.ut.math.tvt.salessystem.domain.data.Sale;
@@ -7,11 +14,6 @@ import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.util.HibernateUtil;
-import java.util.Date;
-import java.util.List;
-import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  * Implementation of the sales domain controller.
@@ -25,6 +27,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 	private Session session = HibernateUtil.currentSession();
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<StockItem> getAllStockItems() {
 		List<StockItem> result = session.createQuery("from StockItem").list();
@@ -34,6 +37,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		return result;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Sale> getAllSales() {
 		List<Sale> result = session.createQuery("from Sale").list();
@@ -42,6 +46,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		return result;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Client> getAllClients() {
 		List<Client> clients = session.createQuery("from Client").list();
@@ -51,6 +56,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		return clients;
 	}
 
+	@Override
 	public Client getClient(long id) {
 		return (Client) session.get(Client.class, id);
 	}
@@ -59,6 +65,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		return (StockItem) session.get(StockItem.class, id);
 	}
 
+	@Override
 	public void submitCurrentPurchase(List<SoldItem> soldItems,
 			Client currentClient) {
 
@@ -92,6 +99,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 	}
 
+	@Override
 	public void createStockItem(StockItem stockItem) {
 		// Begin transaction
 		Transaction tx = session.beginTransaction();
@@ -101,16 +109,19 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		log.info("Added new stockItem : " + stockItem);
 	}
 
+	@Override
 	public void cancelCurrentPurchase() {
 		// XXX - Cancel current purchase
 		log.info("Current purchase canceled");
 	}
 
+	@Override
 	public void startNewPurchase() {
 		// XXX - Start new purchase
 		log.info("New purchase started");
 	}
 
+	@Override
 	public void setModel(SalesSystemModel model) {
 		this.model = model;
 	}

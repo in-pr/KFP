@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="POS-task1" basedir=".">
+<project name="KFP-POS-task1" basedir=".">
 
 	<!-- defines variables and files used during the rest of this script -->
 
@@ -39,7 +39,7 @@
 		<path refid="run.classpath" />
 	</path>
 
-	<!-- defines git macro -->
+	<!-- defines macros -->
 
 	<macrodef name="git">
 		<attribute name="command" />
@@ -54,6 +54,15 @@
 		</sequential>
 	</macrodef>
 
+	<macrodef name="copyconfig">
+		<sequential>
+			<mkdir dir="${build.dir}" />
+			<mkdir dir="${classes.dir}" />
+			<copy file="${src.dir}/log4j.properties" todir="${classes.dir}" overwrite="true" />
+			<copy file="${src.dir}/hibernate.cfg.xml" todir="${classes.dir}" overwrite="true" />
+		</sequential>
+	</macrodef>
+
 	<!-- defines runnable ant targets -->
 
 	<target name="clean" description="Removes the files created during the previous build.">
@@ -61,11 +70,8 @@
 	</target>
 
 	<target name="build" description="Compiles the source code and sets log4j and other files in the right places.">
-		<mkdir dir="${build.dir}" />
-		<mkdir dir="${classes.dir}" />
+		<copyconfig />
 		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="compile.classpath" includeantruntime="false" />
-		<copy file="${src.dir}/log4j.properties" todir="${classes.dir}" overwrite="true" />
-		<copy file="${src.dir}/hibernate.cfg.xml" todir="${classes.dir}" overwrite="true" />
 	</target>
 
 	<target name="run" depends="build" description="Executes your application via class Intro.">
@@ -93,14 +99,13 @@
 		<java jar="${jar.dir}/${app.team.name}.jar" fork="yes" />
 	</target>
 
-	<target name="runc" depends="build" description="Run the application (console)">
+	<target name="runc" depends="build" description="Runs the application (from console).">
 		<java classname="${main.class}" classpathref="run.classpath" fork="yes">
 			<arg value="console" />
 		</java>
 	</target>
 
-
-	<target name="git_commit" description=" make a commit to the local repository and push changes to the GitHub server">
+	<target name="git_commit" description="Makes a commit to the local repository and pushes changes to GitHub.">
 		<input message="Commit message" addproperty="commit-message" />
 		<git command="add">
 			<args>
@@ -121,7 +126,7 @@
 		</git>
 	</target>
 
-	<target name="git_tag" description="creates the corresponding tag and synchronizes it with the GitHub">
+	<target name="git_tag" description="Creates the corresponding tag and synchronizes it to GitHub.">
 		<input message="Tag name: " addproperty="tag_name" />
 		<input message="Tag comment: " addproperty="tag_comment" />
 		<git command="tag">
@@ -142,13 +147,13 @@
 		</git>
 	</target>
 
-	<target name="dbmanager" description="Start the HSQLDB manager">
+	<target name="dbmanager" description="Starts the HSQLDB manager.">
 		<java classname="org.hsqldb.util.DatabaseManagerSwing" classpathref="run.classpath" fork="yes">
 			<arg line="--user sa --url ${db.url}" />
 		</java>
 	</target>
 
-	<target name="startdb" description="Start the HSQLDB with the default params">
+	<target name="startdb" description="Starts the HSQLDB with default parameters.">
 		<java classname="org.hsqldb.Server" classpathref="run.classpath" fork="yes">
 			<arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" />
 		</java>
@@ -159,7 +164,7 @@
 		<javac srcdir="${test.src.dir}" destdir="${test.classes.dir}" classpathref="run.classpath" includeantruntime="false" />
 	</target>
 
-	<target name="test" depends="build-tests" description="Run unit tests.">
+	<target name="test" depends="build-tests" description="Runs unit tests.">
 		<junit>
 			<classpath refid="test.classpath" />
 			<formatter type="brief" usefile="false" />

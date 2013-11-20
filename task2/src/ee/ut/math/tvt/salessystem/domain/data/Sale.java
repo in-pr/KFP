@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -66,6 +67,7 @@ public class Sale implements DisplayableItem {
 		this.soldItems = soldItems;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
