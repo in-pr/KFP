@@ -16,12 +16,12 @@ public abstract class SalesSystemTableModel<T extends DisplayableItem> extends
 
 	private static final long serialVersionUID = 1L;
 
-	protected List<T> rows;
+	//protected List<T> rows;
 	protected final String[] headers;
 
 	public SalesSystemTableModel(final String[] headers) {
 		this.headers = headers;
-		rows = new ArrayList<T>();
+//		rows = new ArrayList<T>();
 	}
 
 	/**
@@ -45,48 +45,50 @@ public abstract class SalesSystemTableModel<T extends DisplayableItem> extends
 
 	@Override
 	public int getRowCount() {
-		return rows.size();
+		return this.getTableRows().size();
 	}
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
-		return getColumnValue(rows.get(rowIndex), columnIndex);
+		return getColumnValue(this.getTableRows().get(rowIndex), columnIndex);
 	}
 
 	// search for item with the specified id
 	public T getItemById(final long id) {
-		for (final T item : rows) {
+		for (final T item : this.getTableRows()) {
 			if (item.getId() == id)
 				return item;
 		}
 		throw new NoSuchElementException();
 	}
 
-	public List<T> getTableRows() {
-		return rows;
-	}
+	public abstract List<T> getTableRows();
 
-	public void clear() {
-		rows = new ArrayList<T>();
-		fireTableDataChanged();
-	}
+//	public void clear() {
+//		rows = new ArrayList<T>();
+//		fireTableDataChanged();
+//	}
+//
+//	public void populateWithData(final List<T> data) {
+//		rows.clear();
+//		rows.addAll(data);
+//	}
+//
+//	public void addRow(T row) {
+//		rows.add(row);
+//		fireTableDataChanged();
+//	}
 
-	public void populateWithData(final List<T> data) {
-		rows.clear();
-		rows.addAll(data);
-	}
-
-	public void addRow(T row) {
-		rows.add(row);
-		fireTableDataChanged();
-	}
-
+//	public abstract void clear();
+//	public abstract void populateWithData(final List<T> data);
+//	public abstract void addRow(T row);
+	
 	public T getRow(int index) {
-		return rows.get(index);
+		return this.getTableRows().get(index);
 	}
 
 	public List<T> getRows() {
-		return rows;
+		return this.getTableRows();
 	}
 
 }

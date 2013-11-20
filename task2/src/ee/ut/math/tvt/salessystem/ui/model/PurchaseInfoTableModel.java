@@ -1,6 +1,7 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -19,6 +20,8 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 			.getLogger(PurchaseInfoTableModel.class);
 
 	private SalesSystemModel model;
+	
+	private Sale currentSale;
 
 	public PurchaseInfoTableModel() {
 		super(new String[] { "Id", "Name", "Price", "Quantity", "Sum" });
@@ -54,7 +57,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 			buffer.append(headers[i] + "\t");
 		buffer.append("\n");
 
-		for (final SoldItem item : rows) {
+		for (final SoldItem item : this.getTableRows()) {
 			buffer.append(item.getId() + "\t");
 			buffer.append(item.getName() + "\t");
 			buffer.append(item.getPrice() + "\t");
@@ -67,7 +70,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	}
 
 	public SoldItem getForStockItem(long stockItemId) {
-		for (SoldItem item : rows) {
+		for (SoldItem item : this.getTableRows()) {
 			if (item.getStockItem().getId().equals(stockItemId)) {
 				return item;
 			}
@@ -96,7 +99,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 		} else {
 			validateQuantityInStock(soldItem.getStockItem(),
 					soldItem.getQuantity());
-			rows.add(soldItem);
+			currentSale.addSoldItem(soldItem);
 			log.debug("Added " + soldItem.getName() + " quantity of "
 					+ soldItem.getQuantity());
 		}
@@ -110,7 +113,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	 */
 	public double getTotalPrice() {
 		double price = 0.0;
-		for (SoldItem item : rows) {
+		for (SoldItem item : this.getTableRows()) {
 			price += item.getSum();
 		}
 		return price;
@@ -135,8 +138,39 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	 * Sale. (Used by the history details table in the HistoryTab).
 	 */
 	public void showSale(Sale sale) {
-		this.rows = new ArrayList<SoldItem>(sale.getSoldItems());
+		this.setCurrentSale(sale);
+	//	this.rows = new ArrayList<SoldItem>(sale.getSoldItems());
 		fireTableDataChanged();
+	}
+
+	@Override
+	public List<SoldItem> getTableRows() {
+		// TODO Auto-generated method stub
+		return new ArrayList<SoldItem>(currentSale.getSoldItems());
+	}
+
+	public void setCurrentSale(Sale sale) {
+		// TODO Auto-generated method stub
+		currentSale=sale;
+	}
+
+	public Sale getSale() {
+		// TODO Auto-generated method stub
+		return currentSale;
+	}
+
+	
+	public void clear() {
+		// TODO Auto-generated method stub
+		currentSale=null;
+	}
+
+
+
+	
+	public void addRow(SoldItem row) {
+		// TODO Auto-generated method stub
+		currentSale.addSoldItem(row);
 	}
 
 }

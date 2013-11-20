@@ -2,6 +2,7 @@ package ee.ut.math.tvt.salessystem.ui.model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import ee.ut.math.tvt.salessystem.domain.data.Sale;
 
@@ -14,6 +15,8 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 	private static DateFormat DATE_FORMAT = new SimpleDateFormat(
 			"yyyy.MM.dd HH:mm:ss");
 
+	private Sale oldSale;
+	
 	public PurchaseHistoryTableModel() {
 		super(new String[] { "Id", "Time", "Sum", "Client" });
 	}
@@ -41,7 +44,7 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 			buffer.append(headers[i] + "\t");
 		buffer.append("\n");
 
-		for (final Sale sale : rows) {
+		for (final Sale sale : this.getTableRows()) {
 			buffer.append(sale.getId() + "\t");
 			// buffer.append(sale.getClient() != null ?
 			// sale.getClient().getFirstName() : "" + "\t");
@@ -50,5 +53,30 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 		}
 
 		return buffer.toString();
+	}
+
+	@Override
+	public List<Sale> getTableRows() {
+		// TODO Auto-generated method stub
+	//lõpetada
+		return null;
+	}
+
+	public void clear() {
+		// TODO Auto-generated method stub
+		oldSale=null;
+	}
+
+	
+	public void populateWithData(List<Sale> data) {
+		// TODO Auto-generated method stub
+	//lõpetada	
+	}
+
+	
+	public void addRow(Sale row) {
+		// TODO Auto-generated method stub
+	//lõpetada	
+		fireTableDataChanged();
 	}
 }

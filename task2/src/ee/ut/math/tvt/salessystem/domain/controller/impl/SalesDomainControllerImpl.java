@@ -66,14 +66,14 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	}
 
 	@Override
-	public void submitCurrentPurchase(List<SoldItem> soldItems,
+	public void submitCurrentPurchase(Sale sale,
 			Client currentClient) {
 
 		// Begin transaction
 		Transaction tx = session.beginTransaction();
 
 		// construct new sale object
-		Sale sale = new Sale(soldItems);
+//		Sale sale = new Sale(soldItems);
 		// sale.setId(null);
 		sale.setSellingTime(new Date());
 
@@ -81,7 +81,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		sale.setClient(currentClient);
 
 		// Reduce quantities of stockItems in warehouse
-		for (SoldItem item : soldItems) {
+		for (SoldItem item : sale.getSoldItems()) {
 			// Associate with current sale
 			item.setSale(sale);
 
@@ -119,6 +119,8 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	public void startNewPurchase() {
 		// XXX - Start new purchase
 		log.info("New purchase started");
+		Sale sale= new Sale();
+		model.getCurrentPurchaseTableModel().setCurrentSale(sale);
 	}
 
 	@Override
