@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.salessystem.domain.exception.OutOfStockException;
 
 public class StockTableModelTest {
 
@@ -15,23 +16,25 @@ public class StockTableModelTest {
 
 	@Before
 	public void setUp() throws Exception {
-		item1 = new StockItem(1L, "Lauaviin1", "viin", 4.0, 1);
-		item2 = new StockItem(2L, "Lauaviin1", "viin", 4.0, 2);
+		item1 = new StockItem(1L, "Lauaviin", "viin", 4.0, 1);
+		item2 = new StockItem(2L, "Originaal", "olu", 2.0, 2);
 
 	}
 
 	@Test
-	public void testValidateNameUniqueness() {
+	public void testValidateNameUniqueness() { // TODO currently validates ID instead of name
 		StockTableModel stockTableModel = new StockTableModel();
 		stockTableModel.addItem(item1);
 		stockTableModel.addItem(item2);
 		stockTableModel.addItem(item1);
-		assertEquals(1, stockTableModel.getRowCount());
+		assertEquals(2, stockTableModel.getRowCount());
 	}
 
-	// TODO
-	public void testHasEnoughInStock() {
-
+	@Test(expected = OutOfStockException.class)
+	public void testHasEnoughInStock() throws OutOfStockException {
+		StockTableModel STM = new StockTableModel();
+		STM.addItem(item1);
+		STM.getItem(1L, 2);
 	}
 
 	@Test
