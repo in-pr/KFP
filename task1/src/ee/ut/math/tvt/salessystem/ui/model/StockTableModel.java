@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.salessystem.domain.exception.OutOfStockException;
 
 /**
  * Stock item table model.
@@ -51,6 +52,20 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 					+ stockItem.getQuantity());
 		}
 		fireTableDataChanged();
+	}
+
+	public StockItem getItem(long barCode, int quantity)
+			throws OutOfStockException {
+		for (StockItem it : rows) {
+			if (it.getId() == barCode) {
+				if (quantity <= it.getQuantity()) {
+					return it;
+				} else {
+					throw new OutOfStockException("Out of stock!");
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
