@@ -1,6 +1,5 @@
 package ee.ut.math.tvt.salessystem.domain.controller.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -66,19 +65,18 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	}
 
 	@Override
-	public void submitCurrentPurchase(Sale sale,
-			Client currentClient) {
+	public void registerSale(Sale sale) {
 
 		// Begin transaction
 		Transaction tx = session.beginTransaction();
 
 		// construct new sale object
-//		Sale sale = new Sale(soldItems);
+		// Sale sale = new Sale(soldItems);
 		// sale.setId(null);
-		sale.setSellingTime(new Date());
+		// sale.setSellingTime(new Date());
 
 		// set client who made the sale
-		sale.setClient(currentClient);
+		// sale.setClient(currentClient);
 
 		// Reduce quantities of stockItems in warehouse
 		for (SoldItem item : sale.getSoldItems()) {
@@ -119,7 +117,8 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	public void startNewPurchase() {
 		// XXX - Start new purchase
 		log.info("New purchase started");
-		Sale sale= new Sale();
+		Client client = model.getSelectedClient();
+		Sale sale = new Sale(client);
 		model.getCurrentPurchaseTableModel().setCurrentSale(sale);
 	}
 
