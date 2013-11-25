@@ -32,7 +32,6 @@ public class ClientTab {
 	 * The main entry-point method. Creates the tab.
 	 */
 	public Component draw() {
-		refresh();
 		JPanel panel = new JPanel();
 
 		GridBagConstraints gc = getGbConstraints();

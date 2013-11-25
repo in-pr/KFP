@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.Logger;
 
@@ -93,7 +95,23 @@ public class SalesSystemUI extends JFrame {
 		tabbedPane.add("History", historyTab.draw());
 		tabbedPane.add("Clients", clientTab.draw());
 
+		tabbedPane.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				switch (((JTabbedPane) e.getSource()).getSelectedIndex()) {
+				case 1:
+					stockTab.refresh();
+					break;
+				case 2:
+					historyTab.refresh();
+					break;
+				case 3:
+					clientTab.refresh();
+					break;
+				}
+			}
+		});
+
 		getContentPane().add(tabbedPane);
 	}
-
 }
