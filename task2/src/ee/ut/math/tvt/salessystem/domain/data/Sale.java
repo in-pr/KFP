@@ -40,11 +40,6 @@ public class Sale implements DisplayableItem {
 		this.soldItems = new HashSet<SoldItem>(new ArrayList<SoldItem>());
 	}
 
-	public Sale(List<SoldItem> goods) {
-		this.soldItems = new HashSet<SoldItem>(goods);
-		this.sellingTime = new Date();
-	}
-
 	public Sale(Client client) {
 		this();
 		this.client = client;

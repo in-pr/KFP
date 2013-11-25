@@ -70,14 +70,6 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		// Begin transaction
 		Transaction tx = session.beginTransaction();
 
-		// construct new sale object
-		// Sale sale = new Sale(soldItems);
-		// sale.setId(null);
-		// sale.setSellingTime(new Date());
-
-		// set client who made the sale
-		// sale.setClient(currentClient);
-
 		// Reduce quantities of stockItems in warehouse
 		for (SoldItem item : sale.getSoldItems()) {
 			// Associate with current sale
@@ -125,10 +117,6 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	@Override
 	public void setModel(SalesSystemModel model) {
 		this.model = model;
-	}
-
-	public Sale getSale(Long id) {
-		return (Sale) session.get(Sale.class, id);
 	}
 
 	@Override
