@@ -1,6 +1,5 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,12 +15,10 @@ public abstract class SalesSystemTableModel<T extends DisplayableItem> extends
 
 	private static final long serialVersionUID = 1L;
 
-	//protected List<T> rows;
 	protected final String[] headers;
 
 	public SalesSystemTableModel(final String[] headers) {
 		this.headers = headers;
-//		rows = new ArrayList<T>();
 	}
 
 	/**
@@ -64,25 +61,25 @@ public abstract class SalesSystemTableModel<T extends DisplayableItem> extends
 
 	public abstract List<T> getTableRows();
 
-//	public void clear() {
-//		rows = new ArrayList<T>();
-//		fireTableDataChanged();
-//	}
-//
-//	public void populateWithData(final List<T> data) {
-//		rows.clear();
-//		rows.addAll(data);
-//	}
-//
-//	public void addRow(T row) {
-//		rows.add(row);
-//		fireTableDataChanged();
-//	}
+	// public void clear() {
+	// rows = new ArrayList<T>();
+	// fireTableDataChanged();
+	// }
+	//
+	// public void populateWithData(final List<T> data) {
+	// rows.clear();
+	// rows.addAll(data);
+	// }
+	//
+	// public void addRow(T row) {
+	// rows.add(row);
+	// fireTableDataChanged();
+	// }
 
-//	public abstract void clear();
-//	public abstract void populateWithData(final List<T> data);
-//	public abstract void addRow(T row);
-	
+	// public abstract void clear();
+	// public abstract void populateWithData(final List<T> data);
+	// public abstract void addRow(T row);
+
 	public T getRow(int index) {
 		return this.getTableRows().get(index);
 	}

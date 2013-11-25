@@ -17,7 +17,7 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	private static final Logger log = Logger.getLogger(StockTableModel.class);
 
 	private List<StockItem> rows;
-	
+
 	public StockTableModel() {
 		super(new String[] { "Id", "Name", "Price", "Quantity" });
 		rows = new ArrayList<StockItem>();
@@ -99,27 +99,20 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 
 	@Override
 	public List<StockItem> getTableRows() {
-		// TODO Auto-generated method stub
-		return null;
+		return rows;
 	}
 
-	
 	public void clear() {
-		// TODO Auto-generated method stub
 		rows = new ArrayList<StockItem>();
 		fireTableDataChanged();
 	}
 
-
 	public void populateWithData(List<StockItem> data) {
-		// TODO Auto-generated method stub
 		rows.clear();
 		rows.addAll(data);
 	}
 
-	
 	public void addRow(StockItem row) {
-		// TODO Auto-generated method stub
 		rows.add(row);
 		fireTableDataChanged();
 	}

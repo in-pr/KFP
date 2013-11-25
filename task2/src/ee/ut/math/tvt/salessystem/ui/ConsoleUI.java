@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.data.Client;
+import ee.ut.math.tvt.salessystem.domain.data.Sale;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
@@ -121,7 +122,7 @@ public class ConsoleUI {
 
 		} else if (c[0].equals("s")) {
 			selectClient();
-    
+
 		} else if (c[0].equals("p")) {
 			if (selectedClient == null) {
 				System.out.println("You must select a client first!");
@@ -133,12 +134,12 @@ public class ConsoleUI {
 					soldItems.add(new SoldItem(stockItem, stockItem
 							.getQuantity()));
 				}
-				dc.submitCurrentPurchase(soldItems, selectedClient);
+				// dc.submitCurrentPurchase(soldItems, selectedClient);
+				dc.submitCurrentPurchase(new Sale(), selectedClient);
 				cart.clear();
 			} catch (VerificationFailedException e) {
 				log.error(e.getMessage());
 			}
-			
 
 		} else if (c[0].equals("r")) {
 

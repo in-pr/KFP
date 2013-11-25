@@ -20,11 +20,12 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 			.getLogger(PurchaseInfoTableModel.class);
 
 	private SalesSystemModel model;
-	
+
 	private Sale currentSale;
 
 	public PurchaseInfoTableModel() {
 		super(new String[] { "Id", "Name", "Price", "Quantity", "Sum" });
+		this.currentSale = new Sale(new ArrayList<SoldItem>());
 	}
 
 	public PurchaseInfoTableModel(SalesSystemModel model) {
@@ -139,37 +140,27 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	 */
 	public void showSale(Sale sale) {
 		this.setCurrentSale(sale);
-	//	this.rows = new ArrayList<SoldItem>(sale.getSoldItems());
 		fireTableDataChanged();
 	}
 
 	@Override
 	public List<SoldItem> getTableRows() {
-		// TODO Auto-generated method stub
 		return new ArrayList<SoldItem>(currentSale.getSoldItems());
 	}
 
 	public void setCurrentSale(Sale sale) {
-		// TODO Auto-generated method stub
-		currentSale=sale;
+		currentSale = sale;
 	}
 
 	public Sale getSale() {
-		// TODO Auto-generated method stub
 		return currentSale;
 	}
 
-	
 	public void clear() {
-		// TODO Auto-generated method stub
-		currentSale=null;
+		this.currentSale = new Sale(new ArrayList<SoldItem>());
 	}
 
-
-
-	
 	public void addRow(SoldItem row) {
-		// TODO Auto-generated method stub
 		currentSale.addSoldItem(row);
 	}
 

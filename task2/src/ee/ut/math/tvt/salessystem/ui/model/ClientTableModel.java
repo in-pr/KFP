@@ -11,7 +11,7 @@ import ee.ut.math.tvt.salessystem.domain.data.Client;
 public class ClientTableModel extends SalesSystemTableModel<Client> {
 	private static final long serialVersionUID = 1L;
 	private List<Client> rows;
-	
+
 	public ClientTableModel() {
 		super(new String[] { "Id", "First name", "Discount" });
 		rows = new ArrayList<Client>();
@@ -50,27 +50,20 @@ public class ClientTableModel extends SalesSystemTableModel<Client> {
 
 	@Override
 	public List<Client> getTableRows() {
-		// TODO Auto-generated method stub
-		return null;
+		return rows;
 	}
 
-	
 	public void clear() {
-		// TODO Auto-generated method stub
 		rows = new ArrayList<Client>();
 		fireTableDataChanged();
 	}
 
-	
 	public void populateWithData(List<Client> data) {
-		// TODO Auto-generated method stub
 		rows.clear();
 		rows.addAll(data);
 	}
 
-	
 	public void addRow(Client row) {
-		// TODO Auto-generated method stub
 		rows.add(row);
 		fireTableDataChanged();
 	}
