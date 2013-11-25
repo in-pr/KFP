@@ -99,6 +99,7 @@ public class StockAddPopup extends JFrame {
 			// Add product
 			StockItem newItem = new StockItem(id, name, description, price,
 					quantity);
+			newItem.saveStockItem();
 			model.getWarehouseTableModel().addItem(newItem);
 			PurchaseItemPanel.productField.removeAllItems();
 			for (StockItem sItem : model.getWarehouseTableModel()

@@ -31,6 +31,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		// throw new VerificationFailedException("Underaged!");
 		// XXX - Save purchase
 		HistoryItem newHistoryItem = new HistoryItem(goods);
+		newHistoryItem.saveHistoryItem();
 		model.getHistoryTableModel().addItem(newHistoryItem);
 		Session em = HibernateUtil.currentSession();
 		em.getTransaction().begin();
@@ -58,12 +59,16 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 		StockItem chips = new StockItem(1l, "Lays chips", "Potato chips", 11.0,
 				5);
+		chips.saveStockItem();
 		StockItem chupaChups = new StockItem(2l, "Chupa-chups", "Sweets", 8.0,
 				8);
+		chupaChups.saveStockItem();
 		StockItem frankfurters = new StockItem(3l, "Frankfurters",
 				"Beer sauseges", 15.0, 12);
+		frankfurters.saveStockItem();
 		StockItem beer = new StockItem(4l, "Free Beer", "Student's delight",
 				0.0, 100);
+		beer.saveStockItem();
 
 		dataset.add(chips);
 		dataset.add(chupaChups);
