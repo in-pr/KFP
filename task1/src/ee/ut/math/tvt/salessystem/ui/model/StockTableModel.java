@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.salessystem.domain.exception.DuplicateProductException;
 import ee.ut.math.tvt.salessystem.domain.exception.OutOfStockException;
 
 /**
@@ -40,13 +41,20 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	 * 
 	 * @param stockItem
 	 */
-	public void addItem(final StockItem stockItem) {
+	public void addItem(final StockItem stockItem)
+			throws DuplicateProductException {
 		try {
 			StockItem item = getItemById(stockItem.getId());
 			item.setQuantity(item.getQuantity() + stockItem.getQuantity());
 			log.debug("Found existing item " + stockItem.getName()
 					+ " increased quantity by " + stockItem.getQuantity());
 		} catch (NoSuchElementException e) {
+			for (StockItem item : getTableRows()) {
+				if (stockItem.getName().equals(item.getName())) {
+					throw new DuplicateProductException(
+							"Product with this name already exists!");
+				}
+			}
 			rows.add(stockItem);
 			log.debug("Added " + stockItem.getName() + " quantity of "
 					+ stockItem.getQuantity());
