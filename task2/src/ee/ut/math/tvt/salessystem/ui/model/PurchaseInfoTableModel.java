@@ -157,7 +157,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	}
 
 	public void clear() {
-		this.currentSale = new Sale(new ArrayList<SoldItem>());
+		this.currentSale = new Sale();
 	}
 
 	public void addRow(SoldItem row) {

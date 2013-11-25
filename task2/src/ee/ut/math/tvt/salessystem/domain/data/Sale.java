@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -36,6 +37,7 @@ public class Sale implements DisplayableItem {
 
 	/** Empty constructors are used by hibernate */
 	public Sale() {
+		this.soldItems = new HashSet<SoldItem>(new ArrayList<SoldItem>());
 	}
 
 	public Sale(List<SoldItem> goods) {
