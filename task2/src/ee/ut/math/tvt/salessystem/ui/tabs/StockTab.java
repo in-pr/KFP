@@ -37,8 +37,14 @@ public class StockTab {
 		this.controller = controller;
 	}
 
+	public void refresh() {
+		model.getWarehouseTableModel().populateWithData(
+				controller.getAllStockItems());
+	}
+
 	// warehouse stock tab - consists of a menu and a table
 	public Component draw() {
+		refresh();
 		JPanel panel = new JPanel();
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 

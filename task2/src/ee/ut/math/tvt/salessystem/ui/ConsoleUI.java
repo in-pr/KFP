@@ -135,7 +135,7 @@ public class ConsoleUI {
 							.getQuantity()));
 				}
 				// dc.submitCurrentPurchase(soldItems, selectedClient);
-				dc.submitCurrentPurchase(new Sale(), selectedClient);
+				dc.registerSale(new Sale());
 				cart.clear();
 			} catch (VerificationFailedException e) {
 				log.error(e.getMessage());

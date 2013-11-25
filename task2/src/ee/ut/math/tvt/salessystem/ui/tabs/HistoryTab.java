@@ -12,6 +12,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.data.Sale;
 import ee.ut.math.tvt.salessystem.ui.model.PurchaseInfoTableModel;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
@@ -26,14 +27,23 @@ public class HistoryTab {
 
 	private PurchaseInfoTableModel historyDetailsTableModel;
 
-	public HistoryTab(SalesSystemModel model) {
+	private SalesDomainController controller;
+
+	public HistoryTab(SalesSystemModel model, SalesDomainController controller) {
 		this.model = model;
+		this.controller = controller;
+	}
+
+	public void refresh() {
+		model.getPurchaseHistoryTableModel().populateWithData(
+				controller.getAllSales());
 	}
 
 	/**
 	 * The main entry-point method. Creates the tab.
 	 */
 	public Component draw() {
+		refresh();
 		JPanel panel = new JPanel();
 
 		GridBagConstraints gc = getGbConstraints();
