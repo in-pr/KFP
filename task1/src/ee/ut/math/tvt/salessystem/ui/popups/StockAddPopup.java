@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.salessystem.domain.exception.DuplicateProductException;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.panels.PurchaseItemPanel;
 
@@ -54,6 +55,7 @@ public class StockAddPopup extends JFrame {
 		// Add ok button
 		JButton okButton = new JButton("Add product");
 		okButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				addProduct(elements);
 			}
@@ -63,6 +65,7 @@ public class StockAddPopup extends JFrame {
 		// Add cancel button
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 			}
@@ -107,7 +110,7 @@ public class StockAddPopup extends JFrame {
 				PurchaseItemPanel.productField.addItem(sItem);
 			}
 			frame.dispose();
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException | DuplicateProductException e) {
 			String message = e.getMessage();
 			if (message.equals("")) {
 				message = "Data was not entered in the correct format.";
