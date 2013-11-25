@@ -149,5 +149,20 @@ public class StockItem implements Cloneable, DisplayableItem {
 				getPrice(), getQuantity());
 		return item;
 	}
+	
+	@Override
+	public boolean equals(Object item){
+		if (item == null) return false;
+	    if (item == this) return true;
+	    if (!(item instanceof StockItem))return false;
+	    StockItem stockItem = (StockItem)item;
+		if(this.id.equals(stockItem.getId()) && 
+				this.name.equals(stockItem.getName()) && 
+				this.description.equals(stockItem.getDescription()) &&
+				this.price==stockItem.getPrice() &&
+				this.quantity == stockItem.getQuantity()) 
+			return true;
+		else return false;
+	}
 
 }
